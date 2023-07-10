@@ -1,11 +1,11 @@
 package com.tomorrow.service;
 
-import com.tomorrow.util.ConditionChecker;
-import com.tomorrow.util.WeatherApiBuilder;
+import org.springframework.stereotype.Service;
 import org.springframework.boot.configurationprocessor.json.JSONArray;
 import org.springframework.boot.configurationprocessor.json.JSONException;
 import org.springframework.boot.configurationprocessor.json.JSONObject;
-import org.springframework.stereotype.Service;
+import com.tomorrow.util.ConditionChecker;
+import com.tomorrow.util.WeatherApiBuilder;
 
 import java.io.IOException;
 
@@ -22,8 +22,8 @@ public class WeatherService {
             newApi = new JSONObject(api);
             JSONArray timelines = newApi.getJSONObject("data").getJSONArray("timelines");
             for (int i = 0; i < timelines.length(); i++) {
-                JSONObject object = timelines.getJSONObject(i);
-                JSONArray intervals = object.getJSONArray("intervals");
+                JSONObject timeline = timelines.getJSONObject(i);
+                JSONArray intervals = timeline.getJSONArray("intervals");
                 for (int j = 0; j < intervals.length(); j++) {
                     JSONObject curr = intervals.getJSONObject(j).getJSONObject("values");
                     boolean ans = conditionChecker.checkIfConditionMet(curr, rules, operator);

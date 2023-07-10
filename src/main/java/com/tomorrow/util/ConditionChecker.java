@@ -21,8 +21,6 @@ public class ConditionChecker {
                 case "rainIntensity" -> met = compareVals(rainIntensity, op, val);
                 case "temperature" -> met = compareVals(temperature, op, val);
                 case "windSpeed" -> met = compareVals(windSpeed, op, val);
-                default -> {
-                }
             }
             if (operator.equals("OR") && met) {
                 return true;

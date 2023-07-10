@@ -2,7 +2,6 @@ package com.tomorrow.controller;
 
 import com.tomorrow.service.WeatherService;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -20,24 +19,24 @@ public class WeatherController {
 
     @GetMapping("/weather-conditions")
     public ResponseEntity<String> getWeatherConditions(@RequestParam("location") String location, @RequestParam("rule") String rule, @RequestParam("operator") String operator) {
-        if (operator.length() == 0) {
+        if (rule.isEmpty()) {
+            return new ResponseEntity<>("Rule cannot be empty", HttpStatus.BAD_REQUEST);
+        }
+        if (operator.isEmpty()) {
             operator = "AND";
         }
         if (!operator.equals("OR") && !operator.equals("AND")) {
-            return new ResponseEntity<>("Invalid operator provided, please use 'AND' or 'OR'", HttpStatusCode.valueOf(400));
-        }
-        if (rule.length() == 0) {
-            return new ResponseEntity<>("Rule cannot be empty", HttpStatusCode.valueOf(400));
+            return new ResponseEntity<>("Invalid operator provided, please use 'AND' or 'OR'", HttpStatus.BAD_REQUEST);
         }
         try {
             String conditions = weatherService.getWeatherConditions(location, rule, operator);
             return new ResponseEntity<>(conditions, HttpStatus.OK);
         } catch (IllegalArgumentException e) {
-            return new ResponseEntity<>(e.getMessage(), HttpStatusCode.valueOf(400));
+            return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
         } catch (IOException e) {
-            return new ResponseEntity<>(e.getMessage(), HttpStatusCode.valueOf(404));
+            return new ResponseEntity<>("API fails to find any data from Tomorrow.io/timeline API", HttpStatus.NOT_FOUND);
         } catch (RuntimeException e) {
-            return new ResponseEntity<>(e.getMessage(), HttpStatusCode.valueOf(500));
+            return new ResponseEntity<>("Internal server error", HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 }
