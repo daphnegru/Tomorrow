@@ -12,7 +12,7 @@ public class WeatherApiBuilder {
     public String getApi(String location) throws IOException, InterruptedException {
         String API_URL = "https://api.tomorrow.io/v4/timelines";
         String API_KEY = "pXKzkPcZeI7qqUnNSFQP7S9if4glxtwo";
-        String url = API_URL +
+        URI uri = URI.create(API_URL +
                 "?location=" +
                 location +
                 "&fields=temperature,humidity,windSpeed,rainIntensity" +
@@ -20,9 +20,7 @@ public class WeatherApiBuilder {
                 "&units=metric" +
                 "&endTime=" +
                 LocalDateTime.now().plusHours(72) +
-                "&apikey=" + API_KEY;
-
-        URI uri = URI.create(url);
+                "&apikey=" + API_KEY);
 
         HttpClient client = HttpClient.newHttpClient();
         HttpRequest request = HttpRequest.newBuilder()
