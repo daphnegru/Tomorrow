@@ -1,6 +1,7 @@
 package com.tomorrow.controller;
 
 import com.tomorrow.service.WeatherService;
+import org.springframework.boot.configurationprocessor.json.JSONException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -33,10 +34,12 @@ public class WeatherController {
             return new ResponseEntity<>(conditions, HttpStatus.OK);
         } catch (IllegalArgumentException e) {
             return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
-        } catch (IOException e) {
-            return new ResponseEntity<>("API fails to find any data from Tomorrow.io/timeline API", HttpStatus.NOT_FOUND);
         } catch (RuntimeException e) {
             return new ResponseEntity<>("Internal server error", HttpStatus.INTERNAL_SERVER_ERROR);
+        } catch (InterruptedException | IOException e) {
+            return new ResponseEntity<>(e.getMessage(), HttpStatus.NOT_FOUND);
+        } catch (JSONException e) {
+            throw new RuntimeException(e);
         }
     }
 }

@@ -14,11 +14,11 @@ public class WeatherService {
     private final WeatherApiBuilder weatherApiBuilder = new WeatherApiBuilder();
     private final ConditionChecker conditionChecker = new ConditionChecker();
 
-    public String getWeatherConditions(String location, String rule, String operator) throws IOException {
-        String api = weatherApiBuilder.getApi(location);
-        String[] rules = rule.split(",");
+    public String getWeatherConditions(String location, String rule, String operator) throws IOException, InterruptedException, JSONException {
         JSONObject newApi;
         try {
+            String api = weatherApiBuilder.getApi(location);
+            String[] rules = rule.split(",");
             newApi = new JSONObject(api);
             JSONArray timelines = newApi.getJSONObject("data").getJSONArray("timelines");
             for (int i = 0; i < timelines.length(); i++) {
@@ -30,8 +30,8 @@ public class WeatherService {
                     curr.put("condition_met", ans);
                 }
             }
-        } catch (JSONException e) {
-            throw new IllegalArgumentException(e);
+        } catch (IOException | JSONException e) {
+            throw new RuntimeException(e);
         }
         return newApi.toString();
     }
