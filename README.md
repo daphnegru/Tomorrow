@@ -10,7 +10,9 @@ GET /weather-conditions:
             ii. humidity
             iii. windSpeed
             iv. rainIntensity
-        3. operator(optional): receives "AND" or "OR", only in there uppercase version ("and" will not work). if empty defaults to "AND".
+        3. operator(optional): receives "AND" or "OR".
+            Only uppercase version ("and" will not work).
+            If empty defaults to "AND".
 
 Example request:
 http://localhost:8080/weather-conditions?location=40.7,-73.9&rule=temperature%3E20,windSpeed%3C4&operator=AND
