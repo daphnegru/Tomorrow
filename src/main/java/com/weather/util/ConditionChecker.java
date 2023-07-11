@@ -1,7 +1,8 @@
 package com.weather.util;
 
-import org.springframework.boot.configurationprocessor.json.JSONException;
-import org.springframework.boot.configurationprocessor.json.JSONObject;
+import org.json.JSONObject;
+import org.json.JSONException;
+
 
 public class ConditionChecker {
     private final String HUMIDITY = "humidity";

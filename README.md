@@ -16,9 +16,11 @@ GET /weather-conditions:
 
 How to run the application:
 1. You will need Java 17 and maven.
-2. run mvn clean install
-3. mvn spring-boot:run
-4. run ```curl http://localhost:8080/weather-conditions?location=40.7,-73.9&rule=temperature%3E20,windSpeed%3C4&operator=AND```
+2. Run: mvn clean install
+3. Run: mvn spring-boot:run
+   * this will start your server
+4. In another terminal run ```curl http://localhost:8080/weather-conditions?location=40.7,-73.9&rule=temperature%3E20,windSpeed%3C4&operator=AND```
+5. Or you can try to run it in postman or your browser.
 
 
 Example Response:

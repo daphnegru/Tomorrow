@@ -4,9 +4,9 @@ import com.weather.util.Interval;
 import com.weather.util.Timeline;
 import com.weather.util.ConditionChecker;
 import com.weather.util.WeatherApiBuilder;
-import org.springframework.boot.configurationprocessor.json.JSONArray;
-import org.springframework.boot.configurationprocessor.json.JSONException;
-import org.springframework.boot.configurationprocessor.json.JSONObject;
+import org.json.JSONException;
+import org.json.JSONObject;
+import org.json.JSONArray;
 import org.springframework.stereotype.Service;
 
 import java.io.IOException;
@@ -25,7 +25,7 @@ public class WeatherService {
             String[] rules = rule.split(",");
             JSONArray intervals = newApi.getJSONObject("data").getJSONArray("timelines").getJSONObject(0).getJSONArray("intervals");
             return new Timeline(getTimelines(intervals, rules, operator));
-        } catch (IOException | JSONException e) {
+        } catch (IOException e) {
             throw new RuntimeException(e);
         }
     }

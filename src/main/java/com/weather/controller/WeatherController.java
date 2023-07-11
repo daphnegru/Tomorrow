@@ -6,7 +6,6 @@ import com.weather.response.BasicResponse;
 import com.weather.response.WeatherResponse;
 import com.weather.service.WeatherService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.configurationprocessor.json.JSONException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -50,8 +49,6 @@ public class WeatherController {
         } catch (InterruptedException | IOException e) {
             WeatherErrorDetails details = new WeatherErrorDetails(HttpStatus.NOT_FOUND.value(), e.getMessage());
             return new ResponseEntity<>(new WeatherError("error", details), HttpStatus.NOT_FOUND);
-        } catch (JSONException e) {
-            throw new RuntimeException(e);
         }
     }
 }
