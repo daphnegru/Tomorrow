@@ -1,4 +1,4 @@
-package com.tomorrow.util;
+package com.weather.util;
 
 import org.springframework.boot.configurationprocessor.json.JSONException;
 import org.springframework.boot.configurationprocessor.json.JSONObject;
@@ -22,10 +22,8 @@ public class ConditionChecker {
                 case "temperature" -> met = compareVals(temperature, op, val);
                 case "windSpeed" -> met = compareVals(windSpeed, op, val);
             }
-            if (operator.equals("OR") && met) {
-                return true;
-            } else if (operator.equals("AND") && !met) {
-                return false;
+            if ((operator.equals("OR") && met) || (operator.equals("AND") && !met)) {
+                return met;
             }
         }
         return operator.equals("AND");

@@ -1,11 +1,11 @@
-package com.tomorrow.service;
+package com.weather.service;
 
 import org.springframework.stereotype.Service;
 import org.springframework.boot.configurationprocessor.json.JSONArray;
 import org.springframework.boot.configurationprocessor.json.JSONException;
 import org.springframework.boot.configurationprocessor.json.JSONObject;
-import com.tomorrow.util.ConditionChecker;
-import com.tomorrow.util.WeatherApiBuilder;
+import com.weather.util.ConditionChecker;
+import com.weather.util.WeatherApiBuilder;
 
 import java.io.IOException;
 

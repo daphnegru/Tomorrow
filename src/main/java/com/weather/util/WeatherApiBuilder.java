@@ -1,4 +1,4 @@
-package com.tomorrow.util;
+package com.weather.util;
 
 import java.io.IOException;
 import java.net.URI;

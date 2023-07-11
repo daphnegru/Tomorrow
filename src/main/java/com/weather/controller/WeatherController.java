@@ -1,6 +1,6 @@
-package com.tomorrow.controller;
+package com.weather.controller;
 
-import com.tomorrow.service.WeatherService;
+import com.weather.service.WeatherService;
 import org.springframework.boot.configurationprocessor.json.JSONException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
