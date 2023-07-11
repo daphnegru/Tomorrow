@@ -5,6 +5,7 @@ import com.weather.error.WeatherErrorDetails;
 import com.weather.response.BasicResponse;
 import com.weather.response.WeatherResponse;
 import com.weather.service.WeatherService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.configurationprocessor.json.JSONException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -17,7 +18,7 @@ import java.io.IOException;
 @RestController
 public class WeatherController {
     private final WeatherService weatherService;
-
+    @Autowired
     public WeatherController(WeatherService weatherService) {
         this.weatherService = weatherService;
     }
