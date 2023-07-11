@@ -26,8 +26,7 @@ public class WeatherService {
                 JSONArray intervals = timeline.getJSONArray("intervals");
                 for (int j = 0; j < intervals.length(); j++) {
                     JSONObject curr = intervals.getJSONObject(j).getJSONObject("values");
-                    boolean ans = conditionChecker.checkIfConditionMet(curr, rules, operator);
-                    curr.put("condition_met", ans);
+                    curr.put("condition_met", conditionChecker.checkIfConditionMet(curr, rules, operator));
                 }
             }
         } catch (IOException | JSONException e) {

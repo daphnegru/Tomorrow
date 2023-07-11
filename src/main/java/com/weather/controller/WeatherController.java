@@ -19,7 +19,9 @@ public class WeatherController {
     }
 
     @GetMapping("/weather-conditions")
-    public ResponseEntity<String> getWeatherConditions(@RequestParam("location") String location, @RequestParam("rule") String rule, @RequestParam("operator") String operator) {
+    public ResponseEntity<String> getWeatherConditions(@RequestParam("location") String location,
+                                                       @RequestParam("rule") String rule,
+                                                       @RequestParam("operator") String operator) {
         if (rule.isEmpty()) {
             return new ResponseEntity<>("Rule cannot be empty", HttpStatus.BAD_REQUEST);
         }
