@@ -1,4 +1,7 @@
 package com.weather.error;
 
-public record WeatherErrorDetails(int code, String message) {
+import com.fasterxml.jackson.annotation.JsonProperty;
+
+public record WeatherErrorDetails(@JsonProperty("code") int code,
+                                  @JsonProperty("message") String message) {
 }

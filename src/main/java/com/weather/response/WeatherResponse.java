@@ -1,13 +1,15 @@
 package com.weather.response;
 
+import com.weather.util.Timeline;
+
 public class WeatherResponse extends BasicResponse {
-    private final String data;
-    public WeatherResponse(String status, String data) {
+    private final Timeline data;
+    public WeatherResponse(String status, Timeline data) {
         super(status);
         this.data = data;
     }
 
-    public String getData() {
+    public Timeline getData() {
         return data;
     }
 }
