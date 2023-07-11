@@ -2,6 +2,8 @@ package com.weather.controller;
 
 import com.weather.error.WeatherError;
 import com.weather.error.WeatherErrorDetails;
+import com.weather.response.BasicResponse;
+import com.weather.response.WeatherResponse;
 import com.weather.service.WeatherService;
 import org.springframework.boot.configurationprocessor.json.JSONException;
 import org.springframework.http.HttpStatus;
@@ -21,9 +23,9 @@ public class WeatherController {
     }
 
     @GetMapping("/weather-conditions")
-    public ResponseEntity<Object> getWeatherConditions(@RequestParam(value = "location") String location,
-                                                                @RequestParam(value = "rule") String rule,
-                                                                @RequestParam("operator") String operator) {
+    public ResponseEntity<BasicResponse> getWeatherConditions(@RequestParam(value = "location") String location,
+                                                              @RequestParam(value = "rule") String rule,
+                                                              @RequestParam("operator") String operator) {
         if (rule.isEmpty() || location.isEmpty()) {
             WeatherErrorDetails details = new WeatherErrorDetails(HttpStatus.BAD_REQUEST.value(), "Rule/Location cannot be empty");
             return new ResponseEntity<>(new WeatherError("error", details), HttpStatus.BAD_REQUEST);
@@ -36,7 +38,8 @@ public class WeatherController {
             return new ResponseEntity<>(new WeatherError("error", details), HttpStatus.BAD_REQUEST);
         }
         try {
-            return new ResponseEntity<>(weatherService.getWeatherConditions(location, rule, operator), HttpStatus.OK);
+            WeatherResponse response = new WeatherResponse("success", weatherService.getWeatherConditions(location, rule, operator));
+            return new ResponseEntity<>(response, HttpStatus.OK);
         } catch (IllegalArgumentException e) {
             WeatherErrorDetails details = new WeatherErrorDetails(HttpStatus.BAD_REQUEST.value(), e.getMessage());
             return new ResponseEntity<>(new WeatherError("error", details), HttpStatus.BAD_REQUEST);
