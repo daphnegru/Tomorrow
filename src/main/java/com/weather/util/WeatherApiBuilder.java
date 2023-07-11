@@ -30,7 +30,7 @@ public class WeatherApiBuilder {
         if (response.statusCode() == 200) {
             return response.body();
         } else {
-            throw new IOException("API fails to find any data from Tomorrow.io/timeline API");
+            throw new IOException("API failed to find any data from Tomorrow.io/timeline API");
         }
     }
 }
