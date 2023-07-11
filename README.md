@@ -14,6 +14,12 @@ GET /weather-conditions:
             Only uppercase version ("and" will not work).
             If empty defaults to "AND".
 
+How to run the application:
+1. You will need Java 17 and maven.
+2. run mvn clean install
+3. mvn spring-boot:run
+4. run ```curl http://localhost:8080/weather-conditions?location=40.7,-73.9&rule=temperature%3E20,windSpeed%3C4&operator=AND```
+
 Example request:
 http://localhost:8080/weather-conditions?location=40.7,-73.9&rule=temperature%3E20,windSpeed%3C4&operator=AND
 
